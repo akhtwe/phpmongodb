@@ -1,12 +1,20 @@
 <?php
-    // phpinfo();die();
-    require_once __DIR__ . '/vendor/autoload.php';
 
-    $client=new MongoDB\Client;
-    
-    $companydb=$client->companydb;
+$request = $_SERVER['REQUEST_URI'];
 
-    $result=$companydb->createCollection('empcollection');
-    var_dump($result);die();
-
-?>
+switch ($request) {
+    case '/' :
+        require __DIR__ . '/guests/index.php';
+        break;
+    case '' :
+        require __DIR__ . '/guests/index.php';
+        break;
+    case '/guests/add' :
+        require __DIR__ . '/guests/add.php';
+        break;
+    default:
+        http_response_code(404);
+        echo '<h3 style="text-align:center;">404 Not Found!</h3>';
+        die();
+        break;
+}
